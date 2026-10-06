@@ -1,0 +1,1167 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+
+
+/* =========================================================
+   VARIÁVEIS
+   ========================================================= */
+
+:root {
+    --primary: #3B50FF;
+    --primary-hover: #3045ED;
+
+    --sidebar: #02051D;
+    --background: #F7F8FC;
+    --card: #FFFFFF;
+
+    --text: #101828;
+    --text-secondary: #667085;
+    --text-muted: #98A2B3;
+
+    --border: #E2E5EB;
+    --border-light: #EAECF0;
+
+    --success: #10B981;
+    --success-bg: #ECFDF5;
+
+    --danger: #EF4444;
+    --danger-bg: #FFF1F2;
+
+    --inactive: #6B7280;
+    --inactive-bg: #F3F4F6;
+
+    --cancelled: #F97316;
+    --cancelled-bg: #FFF7ED;
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family: 'DM Sans', sans-serif;
+
+    background: var(--background);
+    color: var(--text);
+
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+body,
+button,
+input,
+select,
+textarea,
+a,
+table,
+th,
+td {
+    font-family: 'DM Sans', sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+a {
+    color: inherit;
+}
+
+
+/* =========================================================
+   ESTRUTURA PRINCIPAL
+   ========================================================= */
+
+.app {
+    min-height: 100vh;
+    display: flex;
+}
+
+.sidebar {
+    width: 285px;
+    min-height: 100vh;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    padding: 38px 24px;
+
+    background: var(--sidebar);
+}
+
+.main {
+    width: calc(100% - 285px);
+    min-height: 100vh;
+
+    margin-left: 285px;
+
+    padding: 48px 52px 60px;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.logo {
+    margin: 0 16px 52px;
+
+    color: #FFFFFF;
+
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 700;
+
+    letter-spacing: -0.6px;
+
+    white-space: nowrap;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+
+    min-height: 58px;
+
+    padding: 0 20px;
+
+    border-radius: 999px;
+
+    color: #AEB5C9;
+
+    font-size: 16px;
+    font-weight: 500;
+
+    text-decoration: none;
+
+    transition:
+            background 0.2s ease,
+            color 0.2s ease;
+}
+
+.menu-item:hover {
+    color: #FFFFFF;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.menu-item.active {
+    background: var(--primary);
+    color: #FFFFFF;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 40px;
+}
+
+.page-title {
+    margin: 0;
+
+    color: var(--text);
+
+    font-size: 36px;
+    line-height: 1.15;
+    font-weight: 700;
+
+    letter-spacing: -1px;
+}
+
+.page-subtitle {
+    margin: 10px 0 0;
+
+    color: var(--text-secondary);
+
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   BOTÕES GERAIS
+   ========================================================= */
+/* =========================================================
+   BOTÕES
+   ========================================================= */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    outline: none;
+
+    cursor: pointer;
+
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+            background-color 0.2s ease,
+            border-color 0.2s ease,
+            color 0.2s ease,
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+}
+
+
+/* =========================================================
+   BOTÃO PRIMÁRIO — HEADER
+   Ex.: Novo aluno +
+   ========================================================= */
+
+.btn-primary {
+    height: 48px;
+
+    padding: 0 22px;
+
+    background: #3B50FF;
+    color: #FFFFFF;
+
+    border: 0;
+    border-radius: 999px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    box-shadow: 0 6px 16px rgba(59, 80, 255, 0.12);
+}
+
+.btn-primary:hover {
+    background: #3045ED;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 8px 18px rgba(59, 80, 255, 0.18);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   AÇÕES DE FORMULÁRIO
+   Ex.: Cadastrar aluno / Salvar plano
+   ========================================================= */
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    margin-top: 30px;
+}
+
+
+/* =========================================================
+   BOTÃO PRINCIPAL DO FORMULÁRIO
+   ========================================================= */
+
+.form-actions .btn-primary {
+    height: 52px;
+
+    min-width: 190px;
+
+    padding: 0 20px;
+
+    background: #3B50FF;
+    color: #FFFFFF;
+
+    border: none;
+    border-radius: 999px;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    box-shadow: 0 7px 18px rgba(59, 80, 255, 0.14);
+}
+
+.form-actions .btn-primary:hover {
+    background: #3045ED;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 9px 20px rgba(59, 80, 255, 0.18);
+}
+
+.form-actions .btn-primary:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   BOTÃO CANCELAR DO FORMULÁRIO
+   ========================================================= */
+
+.form-actions .btn-secondary {
+    height: 52px;
+
+    min-width: 126px;
+
+    padding: 0 20px;
+
+    background: #FFFFFF;
+    color: #172033;
+
+    border: 1px solid #E1E5EC;
+    border-radius: 999px;
+
+    font-size: 16px;
+    font-weight: 500;
+
+    white-space: nowrap;
+}
+
+.form-actions .btn-secondary:hover {
+    background: #F8F9FC;
+
+    border-color: #CDD2DA;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   BOTÕES DA TABELA
+   Ex.: Editar / Renovar
+   ========================================================= */
+
+.table-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 36px;
+
+    padding: 0 13px;
+
+    background: #FFFFFF;
+    color: #172033;
+
+    border: 1px solid #E1E5EC;
+    border-radius: 9px;
+
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+            background-color 0.2s ease,
+            border-color 0.2s ease,
+            transform 0.2s ease;
+}
+
+.action-btn:hover {
+    background: #F8F9FC;
+
+    border-color: #CDD2DA;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   BOTÃO SECUNDÁRIO GERAL
+   ========================================================= */
+
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 44px;
+
+    padding: 0 20px;
+
+    background: #FFFFFF;
+    color: #172033;
+
+    border: 1px solid #E1E5EC;
+    border-radius: 999px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background: #F8F9FC;
+
+    border-color: #CDD2DA;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   BOTÕES DOS PLANOS
+   ========================================================= */
+
+.plano-acoes {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 22px;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .form-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+
+        gap: 10px;
+    }
+
+    .form-actions .btn-primary,
+    .form-actions .btn-secondary {
+        width: 100%;
+        min-width: 0;
+
+        height: 50px;
+    }
+
+    .btn-primary {
+        height: 46px;
+    }
+
+    .table-actions {
+        gap: 6px;
+    }
+
+    .action-btn {
+        height: 36px;
+
+        padding: 0 12px;
+    }
+}
+
+
+/* =========================================================
+   CARDS DO DASHBOARD
+   ========================================================= */
+
+.dashboard-cards {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 24px;
+
+    margin-bottom: 36px;
+}
+
+.dashboard-card {
+    min-height: 145px;
+
+    padding: 26px 28px;
+
+    background: var(--card);
+
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+
+    box-shadow:
+            0 2px 8px rgba(16, 24, 40, 0.03);
+
+    transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+            0 8px 20px rgba(16, 24, 40, 0.06);
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.card-label {
+    color: var(--text-secondary);
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.card-value {
+    color: var(--text);
+
+    font-size: 32px;
+    line-height: 1;
+
+    font-weight: 700;
+
+    letter-spacing: -0.8px;
+}
+
+
+/* =========================================================
+   SEÇÃO DE MATRÍCULAS
+   ========================================================= */
+
+.dashboard-section {
+    background: var(--card);
+
+    padding: 30px 30px 24px;
+
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+
+    box-shadow:
+            0 2px 8px rgba(16, 24, 40, 0.03);
+}
+
+.section-header {
+    margin-bottom: 28px;
+}
+
+.section-header h2 {
+    margin: 0;
+
+    color: var(--text);
+
+    font-size: 22px;
+    line-height: 1.3;
+
+    font-weight: 700;
+
+    letter-spacing: -0.3px;
+}
+
+.section-header p {
+    margin: 7px 0 0;
+
+    color: var(--text-secondary);
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   TABELA
+   ========================================================= */
+
+.table-container {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+
+    border-collapse: separate;
+    border-spacing: 0;
+
+    font-size: 14px;
+}
+
+
+/* ---------------------------------------------------------
+   CABEÇALHO
+   --------------------------------------------------------- */
+
+thead th {
+    padding: 15px 18px;
+
+    background: #FAFAFC;
+
+    color: #667085;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    text-align: left;
+
+    white-space: nowrap;
+
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+}
+
+thead th:first-child {
+    border-top-left-radius: 10px;
+}
+
+thead th:last-child {
+    border-top-right-radius: 10px;
+}
+
+
+/* ---------------------------------------------------------
+   LINHAS
+   --------------------------------------------------------- */
+
+tbody tr {
+    transition: background 0.15s ease;
+}
+
+tbody tr:hover {
+    background: #FAFBFF;
+}
+
+tbody td {
+    padding: 17px 18px;
+
+    color: #344054;
+
+    font-size: 14px;
+
+    vertical-align: middle;
+
+    white-space: nowrap;
+
+    border-bottom: 1px solid var(--border-light);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+tbody td strong {
+    color: var(--text);
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px 16px;
+
+    border-radius: 999px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    line-height: 1;
+
+    white-space: nowrap;
+}
+
+
+/* ---------------------------------------------------------
+   ATIVA
+   --------------------------------------------------------- */
+
+.status-active {
+    background: var(--success-bg);
+    color: var(--success);
+
+    border: 2px solid var(--success);
+}
+
+
+/* ---------------------------------------------------------
+   VENCIDA
+   --------------------------------------------------------- */
+
+.status-expired {
+    background: var(--danger-bg);
+    color: var(--danger);
+
+    border: 2px solid var(--danger);
+}
+
+
+/* ---------------------------------------------------------
+   INATIVA
+   --------------------------------------------------------- */
+
+.status-inactive {
+    background: var(--inactive-bg);
+    color: var(--inactive);
+
+    border: 2px solid #9CA3AF;
+}
+
+
+/* ---------------------------------------------------------
+   CANCELADA
+   --------------------------------------------------------- */
+
+.status-cancelled {
+    background: var(--cancelled-bg);
+    color: var(--cancelled);
+
+    border: 2px solid var(--cancelled);
+}
+
+
+/* =========================================================
+   BOTÕES DA TABELA
+   ========================================================= */
+
+.table-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 40px;
+
+    padding: 0 15px;
+
+    background: #FFFFFF;
+    color: #172033;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+
+    transition:
+            background 0.2s ease,
+            border-color 0.2s ease,
+            color 0.2s ease,
+            transform 0.2s ease;
+}
+
+.action-btn:hover {
+    background: #F8F9FC;
+
+    border-color: #C9CED8;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   FORMULÁRIOS
+   ========================================================= */
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 22px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.form-group label {
+    color: #344054;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    min-height: 48px;
+
+    padding: 0 14px;
+
+    background: #FFFFFF;
+
+    color: #172033;
+
+    border: 1px solid #DDE2EA;
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+}
+
+.form-group textarea {
+    min-height: 110px;
+
+    padding: 14px;
+
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--primary);
+
+    box-shadow:
+            0 0 0 3px rgba(59, 80, 255, 0.10);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #98A2B3;
+}
+
+.form-help {
+    color: var(--text-muted);
+
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   PLANOS
+   ========================================================= */
+
+.planos-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 24px;
+}
+
+.plano-card {
+    background: #FFFFFF;
+
+    padding: 26px;
+
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+
+    box-shadow:
+            0 2px 8px rgba(16, 24, 40, 0.03);
+}
+
+.plano-card h3 {
+    margin: 0 0 8px;
+
+    color: var(--text);
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.plano-card p {
+    color: var(--text-secondary);
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.plano-valor {
+    margin-top: 20px;
+
+    color: var(--text);
+
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.plano-acoes {
+    display: flex;
+
+    gap: 8px;
+
+    margin-top: 22px;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE — TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .sidebar {
+        width: 230px;
+    }
+
+    .main {
+        width: calc(100% - 230px);
+
+        margin-left: 230px;
+
+        padding: 40px 30px 50px;
+    }
+
+    .dashboard-cards {
+        gap: 16px;
+    }
+
+    .dashboard-card {
+        padding: 24px;
+    }
+
+    .planos-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE — TABLET PEQUENO
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .page-header {
+        align-items: flex-start;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .planos-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE — MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .app {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        position: relative;
+
+        width: 100%;
+        min-height: auto;
+
+        padding: 22px 20px;
+    }
+
+    .logo {
+        margin: 0 0 22px;
+
+        font-size: 24px;
+    }
+
+    .menu {
+        flex-direction: row;
+
+        gap: 6px;
+
+        overflow-x: auto;
+    }
+
+    .menu-item {
+        min-height: 46px;
+
+        padding: 0 18px;
+
+        white-space: nowrap;
+    }
+
+    .main {
+        width: 100%;
+
+        margin-left: 0;
+
+        padding: 30px 20px 40px;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: stretch;
+
+        margin-bottom: 30px;
+    }
+
+    .page-title {
+        font-size: 30px;
+    }
+
+    .page-subtitle {
+        font-size: 14px;
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+
+    .dashboard-section {
+        padding: 22px 18px;
+    }
+
+    .dashboard-card {
+        min-height: 130px;
+    }
+
+    .section-header {
+        margin-bottom: 22px;
+    }
+
+    .table-container {
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 1000px;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+    }
+
+    .form-actions .btn-primary,
+    .form-actions .btn-secondary {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .action-btn {
+        height: 38px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE — MOBILE PEQUENO
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .main {
+        padding: 24px 16px 35px;
+    }
+
+    .page-title {
+        font-size: 27px;
+    }
+
+    .dashboard-section {
+        padding: 20px 15px;
+    }
+
+    .dashboard-card {
+        padding: 22px;
+    }
+
+    .card-value {
+        font-size: 29px;
+    }
+
+    .btn-primary {
+        height: 58px;
+
+        padding: 0 24px;
+
+        font-size: 15px;
+    }
+
+    .form-actions .btn-primary,
+    .form-actions .btn-secondary {
+        height: 58px;
+    }
+}

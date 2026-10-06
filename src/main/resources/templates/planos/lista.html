@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Planos - Academia</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+
+<div class="app">
+
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            Academia
+        </div>
+
+        <nav class="menu">
+
+            <a href="/"
+               class="menu-item">
+                Dashboard
+            </a>
+
+            <a href="/alunos/novo"
+               class="menu-item">
+                Novo aluno
+            </a>
+
+            <a href="/planos"
+               class="menu-item active">
+                Planos
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- CONTEÚDO -->
+    <main class="main">
+
+
+        <!-- HEADER -->
+        <header class="page-header">
+
+            <div>
+
+                <h1 class="page-title">
+                    Planos
+                </h1>
+
+                <p class="page-subtitle">
+                    Gerencie os planos disponíveis na academia.
+                </p>
+
+            </div>
+
+
+            <a
+                    href="/planos/novo"
+                    class="btn btn-primary">
+
+                + Novo plano
+
+            </a>
+
+        </header>
+
+
+        <!-- TABELA -->
+        <section class="dashboard-section">
+
+            <div class="table-card">
+
+                <table>
+
+                    <thead>
+
+                    <tr>
+
+                        <th>
+                            ID
+                        </th>
+
+                        <th>
+                            Plano
+                        </th>
+
+                        <th>
+                            Descrição
+                        </th>
+
+                        <th>
+                            Valor
+                        </th>
+
+                        <th>
+                            Duração
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Ações
+                        </th>
+
+                    </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                    <tr th:each="plano : ${planos}">
+
+
+                        <!-- ID -->
+                        <td th:text="${plano.id}">
+                            1
+                        </td>
+
+
+                        <!-- NOME -->
+                        <td>
+
+                            <strong th:text="${plano.nome}">
+                                Plano Básico
+                            </strong>
+
+                        </td>
+
+
+                        <!-- DESCRIÇÃO -->
+                        <td th:text="${plano.descricao}">
+                            Acesso à musculação
+                        </td>
+
+
+                        <!-- VALOR -->
+                        <td>
+
+                            <strong>
+                                R$
+                                <span th:text="${#numbers.formatDecimal(plano.valor, 1, 2)}">
+                                    99,90
+                                </span>
+                            </strong>
+
+                        </td>
+
+
+                        <!-- DURAÇÃO -->
+                        <td>
+
+                            <span th:text="${plano.duracaoDias + ' dias'}">
+                                30 dias
+                            </span>
+
+                        </td>
+
+
+                        <!-- STATUS -->
+                        <td>
+
+                            <span
+                                    th:if="${plano.ativo}"
+                                    class="badge badge-success">
+
+                                Ativo
+
+                            </span>
+
+
+                            <span
+                                    th:unless="${plano.ativo}"
+                                    class="badge badge-danger">
+
+                                Inativo
+
+                            </span>
+
+                        </td>
+
+
+                        <!-- AÇÕES -->
+                        <td>
+
+                            <div class="actions">
+
+
+                                <!-- EDITAR -->
+                                <a
+                                        th:href="@{'/planos/editar/' + ${plano.id}}"
+                                        class="action-btn primary">
+
+                                    Editar
+
+                                </a>
+
+
+                                <!-- EXCLUIR -->
+                                <a
+                                        th:href="@{'/planos/excluir/' + ${plano.id}}"
+                                        class="action-btn"
+                                        onclick="return confirm('Tem certeza que deseja excluir este plano?');">
+
+                                    Excluir
+
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- SEM PLANOS -->
+                    <tr th:if="${#lists.isEmpty(planos)}">
+
+                        <td
+                                colspan="7"
+                                style="text-align: center; padding: 40px; color: #858B98;">
+
+                            Nenhum plano cadastrado.
+
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

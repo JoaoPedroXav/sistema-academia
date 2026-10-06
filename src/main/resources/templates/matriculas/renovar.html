@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Renovar matrícula - Academia</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            Academia
+        </div>
+
+        <nav class="menu">
+
+            <a href="/"
+               class="menu-item active">
+                Dashboard
+            </a>
+
+            <a href="/alunos/novo"
+               class="menu-item">
+                Novo aluno
+            </a>
+
+            <a href="/planos"
+               class="menu-item">
+                Planos
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <main class="main">
+
+        <div class="page-header">
+
+            <div>
+
+                <h1 class="page-title">
+                    Renovar matrícula
+                </h1>
+
+                <p class="page-subtitle">
+                    Atualize o vencimento da matrícula do aluno.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <section class="dashboard-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Dados da matrícula
+                    </h2>
+
+                    <p>
+                        Confira os dados antes de renovar.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>
+                        Aluno
+                    </label>
+
+                    <input type="text"
+                           th:value="${aluno.nome}"
+                           readonly>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Plano
+                    </label>
+
+                    <input type="text"
+                           th:value="${plano.nome}"
+                           readonly>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Vencimento atual
+                    </label>
+
+                    <input type="date"
+                           th:value="${matricula.dataFim}"
+                           readonly>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="novaDataFim">
+                        Novo vencimento
+                    </label>
+
+                    <input type="date"
+                           id="novaDataFim"
+                           name="novaDataFim"
+                           th:value="${novaDataSugerida}"
+                           form="formRenovacao"
+                           required>
+
+                    <small class="form-help">
+                        A data sugerida considera mais um período
+                        completo do plano.
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <form id="formRenovacao"
+                  th:action="@{/matriculas/renovar/{id}(id=${matricula.id})}"
+                  method="post">
+
+                <div class="form-actions">
+
+                    <a href="/"
+                       class="btn btn-secondary">
+                        Cancelar
+                    </a>
+
+                    <button type="submit"
+                            class="btn btn-primary">
+                        Renovar matrícula
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

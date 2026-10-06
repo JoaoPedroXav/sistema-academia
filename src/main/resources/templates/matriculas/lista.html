@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Matrículas - Academia</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">A</div>
+            Academia
+        </div>
+
+        <nav class="menu">
+            <a href="/alunos">Alunos</a>
+            <a href="/planos">Planos</a>
+            <a href="/matriculas" class="active">Matrículas</a>
+            <a href="/relatorios/matriculas">Relatórios</a>
+        </nav>
+
+    </aside>
+
+    <main class="main">
+
+        <div class="page-header">
+
+            <div>
+                <h1 class="page-title">Matrículas</h1>
+
+                <p class="page-subtitle">
+                    Gerencie as matrículas dos alunos.
+                </p>
+            </div>
+
+            <a href="/matriculas/novo" class="btn btn-primary">
+                + Nova matrícula
+            </a>
+
+        </div>
+
+        <div class="card table-card">
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Aluno</th>
+                        <th>Plano</th>
+                        <th>Início</th>
+                        <th>Fim</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:each="matricula : ${matriculas}">
+
+                        <td th:text="${matricula.id}"></td>
+
+                        <td>
+                            <strong th:text="'Aluno #' + ${matricula.alunoId}"></strong>
+                        </td>
+
+                        <td th:text="'Plano #' + ${matricula.planoId}"></td>
+
+                        <td th:text="${matricula.dataInicio}"></td>
+
+                        <td th:text="${matricula.dataFim}"></td>
+
+                        <td>
+
+                            <span
+                                    class="badge badge-success"
+                                    th:if="${matricula.status == 'ATIVA'}">
+                                Ativa
+                            </span>
+
+                            <span
+                                    class="badge badge-warning"
+                                    th:if="${matricula.status == 'INATIVA'}">
+                                Inativa
+                            </span>
+
+                            <span
+                                    class="badge badge-danger"
+                                    th:if="${matricula.status == 'CANCELADA'}">
+                                Cancelada
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <div class="actions">
+
+                                <a
+                                        class="action-link"
+                                        th:href="@{/matriculas/editar/{id}(id=${matricula.id})}">
+                                    Editar
+                                </a>
+
+                                <form
+                                        class="renew-form"
+                                        th:action="@{/matriculas/renovar}"
+                                        method="post">
+
+                                    <input
+                                            type="hidden"
+                                            name="id"
+                                            th:value="${matricula.id}">
+
+                                    <input
+                                            type="date"
+                                            name="novaDataFim"
+                                            required>
+
+                                    <button
+                                            type="submit"
+                                            class="btn btn-primary btn-small">
+                                        Renovar
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

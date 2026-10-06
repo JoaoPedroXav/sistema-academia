@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - Academia</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            Academia
+        </div>
+
+        <nav class="menu">
+
+            <a href="/"
+               class="menu-item active">
+                Dashboard
+            </a>
+
+            <a href="/alunos/novo"
+               class="menu-item">
+                Novo aluno
+            </a>
+
+            <a href="/planos"
+               class="menu-item">
+                Planos
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="main">
+
+        <!-- CABEÇALHO -->
+        <header class="page-header">
+
+            <div>
+
+                <h1 class="page-title">
+                    Dashboard
+                </h1>
+
+                <p class="page-subtitle">
+                    Acompanhe os alunos e as matrículas da academia.
+                </p>
+
+            </div>
+
+            <a href="/alunos/novo"
+               class="btn btn-primary">
+                Novo aluno +
+            </a>
+
+        </header>
+
+
+        <!-- CARDS -->
+        <section class="dashboard-cards">
+
+
+            <!-- ALUNOS -->
+            <div class="dashboard-card">
+
+                <div class="card-content">
+
+                    <span class="card-label">
+                        Alunos cadastrados
+                    </span>
+
+                    <strong class="card-value"
+                            th:text="${alunos}">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- MATRÍCULAS ATIVAS -->
+            <div class="dashboard-card">
+
+                <div class="card-content">
+
+                    <span class="card-label">
+                        Matrículas ativas
+                    </span>
+
+                    <strong class="card-value"
+                            th:text="${matriculasAtivas}">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- MATRÍCULAS VENCIDAS -->
+            <div class="dashboard-card">
+
+                <div class="card-content">
+
+                    <span class="card-label">
+                        Matrículas vencidas
+                    </span>
+
+                    <strong class="card-value"
+                            th:text="${matriculasVencidas}">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- TABELA DE MATRÍCULAS -->
+        <section class="dashboard-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Matrículas
+                    </h2>
+
+                    <p>
+                        Alunos e situação das matrículas cadastradas.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                    <tr>
+
+                        <th>
+                            Nome
+                        </th>
+
+                        <th>
+                            CPF
+                        </th>
+
+                        <th>
+                            E-mail
+                        </th>
+
+                        <th>
+                            Telefone
+                        </th>
+
+                        <th>
+                            Plano
+                        </th>
+
+                        <th>
+                            Vencimento
+                        </th>
+
+                        <th>
+                            Situação
+                        </th>
+
+                        <th>
+                            Ações
+                        </th>
+
+                    </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                    <!--
+                        Cada linha representa uma matrícula
+                        retornada pela View
+                        vw_matriculas_detalhadas
+                    -->
+                    <tr th:each="matricula : ${matriculas}">
+
+
+                        <!-- NOME -->
+                        <td>
+
+                            <strong
+                                    th:text="${matricula.aluno}">
+                                Nome do aluno
+                            </strong>
+
+                        </td>
+
+
+                        <!-- CPF -->
+                        <td
+                                th:text="${matricula.cpf}">
+                            000.000.000-00
+                        </td>
+
+
+                        <!-- EMAIL -->
+                        <td
+                                th:text="${matricula.email}">
+                            email@email.com
+                        </td>
+
+
+                        <!-- TELEFONE -->
+                        <td
+                                th:text="${matricula.telefone}">
+                            (00) 00000-0000
+                        </td>
+
+
+                        <!-- PLANO -->
+                        <td
+                                th:text="${matricula.plano}">
+                            Plano
+                        </td>
+
+
+                        <!-- VENCIMENTO -->
+                        <td
+                                th:text="${matricula.dataFim}">
+                            2026-12-31
+                        </td>
+
+
+                        <!-- SITUAÇÃO -->
+                        <td>
+
+                            <span
+                                    th:if="${matricula.situacao == 'ATIVA'}"
+                                    class="status status-active">
+                                Ativa
+                            </span>
+
+
+                            <span
+                                    th:if="${matricula.situacao == 'VENCIDA'}"
+                                    class="status status-expired">
+                                Vencida
+                            </span>
+
+
+                            <span
+                                    th:if="${matricula.situacao == 'INATIVA'}"
+                                    class="status status-inactive">
+                                Inativa
+                            </span>
+
+
+                            <span
+                                    th:if="${matricula.situacao == 'CANCELADA'}"
+                                    class="status status-cancelled">
+                                Cancelada
+                            </span>
+
+                        </td>
+
+
+                        <!-- AÇÕES -->
+                        <td>
+
+                            <div class="table-actions">
+
+                                <!-- EDITAR -->
+                                <a
+                                        th:href="@{/alunos/editar/{id}(id=${matricula.alunoId})}"
+                                        class="action-btn">
+                                    Editar
+                                </a>
+
+
+                                <!-- RENOVAR -->
+                                <a
+                                        th:href="@{/matriculas/renovar/{id}(id=${matricula.matriculaId})}"
+                                        class="action-btn">
+                                    Renovar
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- CASO NÃO EXISTAM MATRÍCULAS -->
+                    <tr th:if="${#lists.isEmpty(matriculas)}">
+
+                        <td colspan="8"
+                            style="text-align: center; padding: 32px;">
+
+                            Nenhuma matrícula cadastrada.
+
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

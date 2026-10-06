@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Matrícula - Academia</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                A
+            </div>
+
+            <span>Academia</span>
+
+        </div>
+
+        <nav class="menu">
+
+            <a href="/">
+                Dashboard
+            </a>
+
+            <a href="/alunos/novo">
+                Novo aluno
+            </a>
+
+            <a href="/planos">
+                Planos
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <header class="page-header">
+
+            <div>
+
+                <h1 class="page-title"
+                    th:text="${matricula.id == null
+                        ? 'Nova matrícula'
+                        : 'Editar matrícula'}">
+
+                    Nova matrícula
+
+                </h1>
+
+                <p class="page-subtitle">
+                    Configure o plano e o período da matrícula.
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <div class="form-card">
+
+            <form
+                    th:action="@{/matriculas/salvar}"
+                    th:object="${matricula}"
+                    method="post">
+
+
+                <input
+                        type="hidden"
+                        th:field="*{id}">
+
+
+                <!-- ALUNO -->
+
+                <div class="form-group">
+
+                    <label
+                            class="form-label"
+                            for="alunoId">
+
+                        ID do aluno
+
+                    </label>
+
+                    <input
+                            id="alunoId"
+                            type="number"
+                            class="form-control"
+                            th:field="*{alunoId}"
+                            placeholder="Digite o ID do aluno"
+                            required>
+
+                </div>
+
+
+                <!-- PLANO -->
+
+                <div class="form-group">
+
+                    <label
+                            class="form-label"
+                            for="planoId">
+
+                        Plano
+
+                    </label>
+
+                    <select
+                            id="planoId"
+                            class="form-control"
+                            th:field="*{planoId}"
+                            required>
+
+                        <option value="">
+                            Selecione um plano
+                        </option>
+
+                        <option
+                                th:each="plano : ${planos}"
+                                th:value="${plano.id}"
+                                th:text="${plano.nome + ' — ' + plano.duracaoDias + ' dias'}">
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- DATA INÍCIO -->
+
+                <div class="form-group">
+
+                    <label
+                            class="form-label"
+                            for="dataInicio">
+
+                        Data de início
+
+                    </label>
+
+                    <input
+                            id="dataInicio"
+                            type="date"
+                            class="form-control"
+                            th:field="*{dataInicio}"
+                            required>
+
+                    <small class="form-help">
+                        A data de término será calculada automaticamente
+                        de acordo com a duração do plano.
+                    </small>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <div class="form-group">
+
+                    <label
+                            class="form-label"
+                            for="status">
+
+                        Status
+
+                    </label>
+
+                    <select
+                            id="status"
+                            class="form-control"
+                            th:field="*{status}">
+
+                        <option value="ATIVA">
+                            Ativa
+                        </option>
+
+                        <option value="INATIVA">
+                            Inativa
+                        </option>
+
+                        <option value="CANCELADA">
+                            Cancelada
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- DATA FIM SOMENTE NA EDIÇÃO -->
+
+                <div
+                        class="form-group"
+                        th:if="${matricula.id != null}">
+
+                    <label class="form-label">
+
+                        Data de término atual
+
+                    </label>
+
+                    <input
+                            type="date"
+                            class="form-control"
+                            th:field="*{dataFim}"
+                            readonly>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <a
+                            href="/"
+                            class="btn btn-secondary">
+
+                        Cancelar
+
+                    </a>
+
+                    <button
+                            type="submit"
+                            class="btn btn-primary">
+
+                        Salvar matrícula
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

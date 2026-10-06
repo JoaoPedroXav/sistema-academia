@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Alunos - Academia</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                A
+            </div>
+
+            <span>Academia</span>
+
+        </div>
+
+        <nav class="menu">
+
+            <a href="/alunos" class="active">
+                Alunos
+            </a>
+
+            <a href="/planos">
+                Planos
+            </a>
+
+            <a href="/matriculas">
+                Matrículas
+            </a>
+
+            <a href="/relatorios/matriculas">
+                Relatórios
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- CONTEÚDO -->
+    <main class="main">
+
+        <header class="page-header">
+
+            <div>
+
+                <h1 class="page-title">
+                    Alunos
+                </h1>
+
+                <p class="page-subtitle">
+                    Gerencie os alunos cadastrados na academia.
+                </p>
+
+            </div>
+
+            <a
+                    href="/alunos/novo"
+                    class="btn btn-primary">
+
+                Novo aluno +
+
+            </a>
+
+        </header>
+
+
+        <!-- TABELA -->
+        <div class="table-card">
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                    <tr>
+
+                        <th>
+                            ID
+                        </th>
+
+                        <th>
+                            Nome
+                        </th>
+
+                        <th>
+                            CPF
+                        </th>
+
+                        <th>
+                            E-mail
+                        </th>
+
+                        <th>
+                            Telefone
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Ações
+                        </th>
+
+                    </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                    <tr th:each="aluno : ${alunos}">
+
+                        <td
+                                th:text="${aluno.id}">
+                        </td>
+
+
+                        <td>
+
+                            <strong
+                                    th:text="${aluno.nome}">
+                            </strong>
+
+                        </td>
+
+
+                        <td
+                                th:text="${aluno.cpf}">
+                        </td>
+
+
+                        <td
+                                th:text="${aluno.email}">
+                        </td>
+
+
+                        <td
+                                th:text="${aluno.telefone}">
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                    class="badge badge-success"
+                                    th:if="${aluno.ativo}">
+
+                                Ativo
+
+                            </span>
+
+
+                            <span
+                                    class="badge badge-danger"
+                                    th:unless="${aluno.ativo}">
+
+                                Inativo
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="actions">
+
+                                <a
+                                        class="action-link"
+                                        th:href="@{/alunos/editar/{id}(id=${aluno.id})}">
+
+                                    Editar
+
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

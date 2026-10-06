@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title
+            th:text="${alunoId != null ? 'Editar aluno - Academia' : 'Novo aluno - Academia'}">
+        Novo aluno - Academia
+    </title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            Academia
+        </div>
+
+        <nav class="menu">
+
+            <a href="/"
+               class="menu-item">
+                Dashboard
+            </a>
+
+            <a href="/alunos/novo"
+               class="menu-item active">
+                Novo aluno
+            </a>
+
+            <a href="/planos"
+               class="menu-item">
+                Planos
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- CONTEÚDO -->
+    <main class="main">
+
+        <!-- HEADER -->
+        <div class="page-header">
+
+            <div>
+
+                <h1 class="page-title"
+                    th:text="${alunoId != null ? 'Editar aluno' : 'Novo aluno'}">
+                    Novo aluno
+                </h1>
+
+                <p class="page-subtitle"
+                   th:text="${alunoId != null
+                       ? 'Atualize os dados do aluno e da matrícula.'
+                       : 'Cadastre o aluno e sua matrícula.'}">
+                    Cadastre o aluno e sua matrícula.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ===================================================== -->
+        <!-- FORMULÁRIO DE NOVO ALUNO -->
+        <!-- ===================================================== -->
+
+        <form
+                th:if="${alunoId == null}"
+                th:action="@{/alunos/salvar}"
+                th:object="${form}"
+                method="post">
+
+
+            <!-- DADOS PESSOAIS -->
+            <section class="dashboard-section">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>
+                            Dados pessoais
+                        </h2>
+
+                        <p>
+                            Informações básicas do aluno
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label for="nome">
+                            Nome
+                        </label>
+
+                        <input
+                                type="text"
+                                id="nome"
+                                th:field="*{nome}"
+                                placeholder="Digite o nome completo"
+                                required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="cpf">
+                            CPF
+                        </label>
+
+                        <input
+                                type="text"
+                                id="cpf"
+                                th:field="*{cpf}"
+                                placeholder="000.000.000-00"
+                                maxlength="14"
+                                required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            E-mail
+                        </label>
+
+                        <input
+                                type="email"
+                                id="email"
+                                th:field="*{email}"
+                                placeholder="email@exemplo.com"
+                                required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="telefone">
+                            Telefone
+                        </label>
+
+                        <input
+                                type="text"
+                                id="telefone"
+                                th:field="*{telefone}"
+                                placeholder="(86) 99999-9999"
+                                maxlength="20">
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- DADOS DA MATRÍCULA -->
+            <section class="dashboard-section">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>
+                            Dados da matrícula
+                        </h2>
+
+                        <p>
+                            Defina o plano e o início da matrícula
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label for="planoId">
+                            Plano
+                        </label>
+
+                        <select
+                                id="planoId"
+                                th:field="*{planoId}"
+                                required>
+
+                            <option value="">
+                                Selecione um plano
+                            </option>
+
+                            <option
+                                    th:each="plano : ${planos}"
+                                    th:value="${plano.id}"
+                                    th:text="${plano.nome + ' — ' + plano.duracaoDias + ' dias'}">
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="dataInicio">
+                            Data de início
+                        </label>
+
+                        <input
+                                type="date"
+                                id="dataInicio"
+                                th:field="*{dataInicio}"
+                                required>
+
+                        <small class="form-help">
+                            A data de término será calculada automaticamente
+                            de acordo com a duração do plano.
+                        </small>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="status">
+                            Status
+                        </label>
+
+                        <select
+                                id="status"
+                                th:field="*{status}">
+
+                            <option value="ATIVA">
+                                Ativa
+                            </option>
+
+                            <option value="INATIVA">
+                                Inativa
+                            </option>
+
+                            <option value="CANCELADA">
+                                Cancelada
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- AÇÕES -->
+            <div class="form-actions">
+
+                <a href="/"
+                   class="btn btn-secondary">
+                    Cancelar
+                </a>
+
+                <button
+                        type="submit"
+                        class="btn btn-primary">
+                    Cadastrar aluno
+                </button>
+
+            </div>
+
+        </form>
+
+
+        <!-- ===================================================== -->
+        <!-- FORMULÁRIO DE EDIÇÃO -->
+        <!-- ===================================================== -->
+
+        <form
+                th:if="${alunoId != null}"
+                th:action="@{/alunos/editar/{id}(id=${alunoId})}"
+                th:object="${form}"
+                method="post">
+
+
+            <!-- DADOS PESSOAIS -->
+            <section class="dashboard-section">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>
+                            Dados pessoais
+                        </h2>
+
+                        <p>
+                            Informações básicas do aluno
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label for="nome">
+                            Nome
+                        </label>
+
+                        <input
+                                type="text"
+                                id="nome"
+                                th:field="*{nome}"
+                                placeholder="Digite o nome completo"
+                                required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="cpf">
+                            CPF
+                        </label>
+
+                        <input
+                                type="text"
+                                id="cpf"
+                                th:field="*{cpf}"
+                                placeholder="000.000.000-00"
+                                maxlength="14"
+                                required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            E-mail
+                        </label>
+
+                        <input
+                                type="email"
+                                id="email"
+                                th:field="*{email}"
+                                placeholder="email@exemplo.com"
+                                required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="telefone">
+                            Telefone
+                        </label>
+
+                        <input
+                                type="text"
+                                id="telefone"
+                                th:field="*{telefone}"
+                                placeholder="(86) 99999-9999"
+                                maxlength="20">
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- DADOS DA MATRÍCULA -->
+            <section class="dashboard-section">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>
+                            Dados da matrícula
+                        </h2>
+
+                        <p>
+                            Defina o plano e o início da matrícula
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label for="planoId">
+                            Plano
+                        </label>
+
+                        <select
+                                id="planoId"
+                                th:field="*{planoId}"
+                                required>
+
+                            <option value="">
+                                Selecione um plano
+                            </option>
+
+                            <option
+                                    th:each="plano : ${planos}"
+                                    th:value="${plano.id}"
+                                    th:text="${plano.nome + ' — ' + plano.duracaoDias + ' dias'}">
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="dataInicio">
+                            Data de início
+                        </label>
+
+                        <input
+                                type="date"
+                                id="dataInicio"
+                                th:field="*{dataInicio}"
+                                required>
+
+                        <small class="form-help">
+                            A data de término será calculada automaticamente
+                            de acordo com a duração do plano.
+                        </small>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="status">
+                            Status
+                        </label>
+
+                        <select
+                                id="status"
+                                th:field="*{status}">
+
+                            <option value="ATIVA">
+                                Ativa
+                            </option>
+
+                            <option value="INATIVA">
+                                Inativa
+                            </option>
+
+                            <option value="CANCELADA">
+                                Cancelada
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- AÇÕES -->
+            <div class="form-actions">
+
+                <a href="/"
+                   class="btn btn-secondary">
+                    Cancelar
+                </a>
+
+                <button
+                        type="submit"
+                        class="btn btn-primary">
+                    Salvar alterações
+                </button>
+
+            </div>
+
+        </form>
+
+    </main>
+
+</div>
+
+</body>
+</html>
