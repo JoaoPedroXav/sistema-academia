@@ -193,7 +193,7 @@ Depois é só abrir [http://localhost:8080](http://localhost:8080).
 
 ## Demonstração
 
-No vídeo de apresentação eu mostro, nesta ordem: cadastro de alunos e planos, criação de matrículas, o Dashboard, a View e a Function em ação e, por fim, a renovação de uma matrícula pela Procedure.
+https://youtu.be/WVPeBJaTSus?is=JCNZaBUKpcR0F8-D
 
 ## Autor
 
